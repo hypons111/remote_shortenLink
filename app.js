@@ -42,7 +42,7 @@ app.post('/url', (req, res) => {
 })
 
 
-app.get('/:code', (req, res) => {
+app.get('https://phase2.3_A14_Shortenlink.herokuapp.com/:code', (req, res) => {
   const code = req.params.code
   Link.find({ code: code })
     .then(data => res.redirect("https://www.google.com"))
