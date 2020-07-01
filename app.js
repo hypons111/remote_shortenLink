@@ -29,9 +29,7 @@ app.post('/url', (req, res) => {
   let originLink = req.body.link
 
   if (!originLink) {
-
     res.render('show')
-
   } else {
     const code = generator()
     return Link.create({ originLink, code })
@@ -41,17 +39,17 @@ app.post('/url', (req, res) => {
       )
   }
 
-  // "https://phase2.3_A14_Shortenlink.herokuapp.com/" + 
+
 
 
 })
 
-// app.get('http://localhost:3000/https://phase2.3_A14_Shortenlink.herokuapp.com/:shortenLink', (req, res) => {
-app.get('/:shortenLink', (req, res) => {
-  // "https://phase2.3_A14_Shortenlink.herokuapp.com/" + 
+// app.get('/:shortenLink', (req, res) => {
+app.get('https://phase2.3_A14_Shortenlink.herokuapp.com/:shortenLink', (req, res) => {
   const code = req.params.shortenLink
   Link.find({ code: code })
-    .then(data => res.redirect("https://" + data[0].originLink))
+    .then(data => console.log(data[0].originLink))
+  // .then(data => res.redirect("https://phase2.3_A14_Shortenlink.herokuapp.com/" + data[0].originLink))
 })
 
 
