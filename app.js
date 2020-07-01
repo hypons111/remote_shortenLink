@@ -45,10 +45,11 @@ app.post('/url', (req, res) => {
 })
 
 // app.get('/:shortenLink', (req, res) => {
-app.get('https://phase2.3_A14_Shortenlink.herokuapp.com/:shortenLink', (req, res) => {
-  const code = req.params.shortenLink
+// app.get('https://phase2.3_a14_shortenlink.herokuapp.com/z7xaz 
+app.get('https://phase2.3_A14_Shortenlink.herokuapp.com/:code', (req, res) => {
+  const code = req.params.code
   Link.find({ code: code })
-    // .then(data => console.log(data[0].originLink))
+    .then(data => console.log(data[0].originLink))
     .then(data => res.redirect(data[0].originLink))
 })
 
