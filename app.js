@@ -48,8 +48,8 @@ app.post('/url', (req, res) => {
 app.get('https://phase2.3_A14_Shortenlink.herokuapp.com/:shortenLink', (req, res) => {
   const code = req.params.shortenLink
   Link.find({ code: code })
-    .then(data => console.log(data[0].originLink))
-  // .then(data => res.redirect("https://phase2.3_A14_Shortenlink.herokuapp.com/" + data[0].originLink))
+    // .then(data => console.log(data[0].originLink))
+    .then(data => res.redirect(data[0].originLink))
 })
 
 
