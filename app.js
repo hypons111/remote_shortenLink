@@ -22,8 +22,9 @@ app.use(bodPar.urlencoded({ extended: true }))
 app.use(metOve('_method'))
 
 
-
-app.get('/', (req, res) => res.render('index'))
+app.get('/', (req, res) => {
+  res.render('index')
+})
 
 app.post('/url', (req, res) => {
   let originLink = req.body.link
@@ -38,19 +39,13 @@ app.post('/url', (req, res) => {
         .catch(error => console.log('error'))
       )
   }
-
-
-
-
 })
 
-// app.get('/:shortenLink', (req, res) => {
-// app.get('https://phase2.3_a14_shortenlink.herokuapp.com/z7xaz 
+
 app.get('https://phase2.3_A14_Shortenlink.herokuapp.com/:code', (req, res) => {
   const code = req.params.code
   Link.find({ code: code })
-    // .then(data => console.log(data[0].originLink))
-    .then(data => res.redirect(data[0].originLink))
+    .then(data => res.redirect(data.originLink))
 })
 
 
