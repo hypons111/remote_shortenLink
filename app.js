@@ -26,14 +26,24 @@ app.use(metOve('_method'))
 app.get('/', (req, res) => res.render('index'))
 
 app.post('/url', (req, res) => {
-  const originLink = req.body.link
+  let originLink = req.body.link
+
+  if (!originLink) {
+
+    res.render('show')
+
+  } else {
+    const code = generator()
+    return Link.create({ originLink, code })
+      .then(() => Link.find({ originLink: originLink })
+        .then(() => res.render('show', { originLink, code }))
+        .catch(error => console.log('error'))
+      )
+  }
+
   // "https://phase2.3_A14_Shortenlink.herokuapp.com/" + 
-  const code = generator()
-  return Link.create({ originLink, code })
-    .then(() => Link.find({ originLink: originLink })
-      .then(() => res.render('show', { originLink, code }))
-      .catch(error => console.log('error'))
-    )
+
+
 })
 
 // app.get('http://localhost:3000/https://phase2.3_A14_Shortenlink.herokuapp.com/:shortenLink', (req, res) => {

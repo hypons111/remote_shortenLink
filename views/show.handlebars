@@ -2,8 +2,16 @@
   <h1>URL Shortener</h1>
 </div>
 
+
+{{#if originLink}}
 <h1>Success! Please use this link:</h1>
 <p>http://localhost:3000/{{ code }}</p>
 {{!-- <p>{{ originLink }}</p> --}}
+{{/ if}}
+
+{{#unless originLink}}
+<h1>請輸入網址</h1>
+{{/ unless}}
+
 
 <a href="/">Back</a>

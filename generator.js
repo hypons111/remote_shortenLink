@@ -1,13 +1,6 @@
 const mongoose = require('mongoose')
 const Link = require('./models/link')
 
-// const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/link'
-
-
-// mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-// const db = mongoose.connection
-// db.on('error', () => console.log('mongodb error'))
-// db.once('open', () => console.log('mongodb connected'))
 
 
 function generator() {
@@ -35,9 +28,5 @@ function generator() {
 
 
 module.exports = generator
-
-
-
-// "https://phase2.3_A14_Shortenlink.herokuapp.com/ecwyy"
 
 
