@@ -8,7 +8,7 @@ const linkSchema = new Schema({
   originLink: {
     type: String
   },
-  shortenLink: {
+  code: {
     type: String
   }
 })

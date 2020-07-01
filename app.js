@@ -27,23 +27,23 @@ app.get('/', (req, res) => res.render('index'))
 
 app.post('/url', (req, res) => {
   const originLink = req.body.link
-  const shortenLink = generator()
-  return Link.create({ originLink, shortenLink })
+  // "https://phase2.3_A14_Shortenlink.herokuapp.com/" + 
+  const code = generator()
+  return Link.create({ originLink, code })
     .then(() => Link.find({ originLink: originLink })
-      .then(() => res.render('show', { originLink, shortenLink }))
+      .then(() => res.render('show', { originLink, code }))
       .catch(error => console.log('error'))
     )
 })
 
 // app.get('http://localhost:3000/https://phase2.3_A14_Shortenlink.herokuapp.com/:shortenLink', (req, res) => {
-
 app.get('/:shortenLink', (req, res) => {
-  const shortenLink = req.params.shortenLink
-  Link.find({ shortenLink: shortenLink })
+  // "https://phase2.3_A14_Shortenlink.herokuapp.com/" + 
+  const code = req.params.shortenLink
+  Link.find({ code: code })
     .then(data => res.redirect("https://" + data[0].originLink))
 })
 
 
 app.listen(port, () => console.log(`This app is running on http://localhost${port}`))
 
-// "https://phase2.3_A14_Shortenlink.herokuapp.com/" + 
