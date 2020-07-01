@@ -45,7 +45,7 @@ app.post('/url', (req, res) => {
 app.get('/:code', (req, res) => {
   const code = req.params.code
   Link.find({ code: code })
-    .then(data => res.redirect(data.originLink))
+    .then(data => res.redirect("https://www.google.com"))
 })
 
 
