@@ -7,7 +7,7 @@ const metOve = require('method-override')
 const mongoose = require('mongoose')
 const generator = require('./generator.js')
 const Link = require('./models/link')
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/link'
+const MONGODB_URI = process.env.MONGODB_URI || 'heroku_s9t8hlbm'
 
 
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
