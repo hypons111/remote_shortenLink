@@ -8,7 +8,7 @@ const mongoose = require('mongoose')
 const generator = require('./generator.js')
 const Link = require('./models/link')
 const MONGODB_URI = process.env.MONGODB_URI || 'heroku_s9t8hlbm'
-
+const host = "https://conservative-parliament-43220.herokuapp.com/"
 
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 const db = mongoose.connection
@@ -30,7 +30,7 @@ app.post('/url', (req, res) => {
   let originLink = req.body.link
 
   if (!originLink) {
-    res.render('show')
+    res.render('show', { host })
   } else {
     const code = generator()
     return Link.create({ originLink, code })
