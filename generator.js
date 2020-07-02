@@ -13,9 +13,9 @@ function generator() {
 
   const shortenLink = 'https://phase2.3_A14_Shortenlink.herokuapp.com/' + code
 
-
   let uniqueCode = Link.find({ code: code })
 
+  // 防止有重覆的網址組合出現
   if (uniqueCode._conditions.code !== code) {
     generator()
   } else {
