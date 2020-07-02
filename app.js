@@ -30,12 +30,12 @@ app.post('/url', (req, res) => {
   let originLink = req.body.link
 
   if (!originLink) {
-    res.render('show', { host })
+    res.render('show')
   } else {
     const code = generator()
     return Link.create({ originLink, code })
       .then(() => Link.find({ originLink: originLink })
-        .then(() => res.render('show', { originLink, code }))
+        .then(() => res.render('show', { originLink, code, host }))
         .catch(error => console.log('error'))
       )
   }
