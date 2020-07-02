@@ -21,7 +21,7 @@ function generator() {
   } else {
     return code
   }
-
+  console.log('data uploaded')
 }
 
 

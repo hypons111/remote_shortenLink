@@ -24,6 +24,7 @@ app.use(metOve('_method'))
 
 app.get('/', (req, res) => {
   res.render('index')
+  console.log('index page')
 })
 
 app.post('/url', (req, res) => {
@@ -36,16 +37,19 @@ app.post('/url', (req, res) => {
     return Link.create({ originLink, code })
       .then(() => Link.find({ originLink: originLink })
         .then(() => res.render('show', { originLink, code }))
+        .then(() => console.log('show page'))
         .catch(error => console.log('error'))
       )
   }
+
 })
 
 
-app.get('https://phase2.3_A14_Shortenlink.herokuapp.com/:code', (req, res) => {
+app.get('/:code', (req, res) => {
   const code = req.params.code
   Link.find({ code: code })
     .then(data => res.redirect("https://www.google.com"))
+    .then(() => console.log('origin page'))
 })
 
 
