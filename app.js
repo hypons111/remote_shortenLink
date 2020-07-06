@@ -3,12 +3,12 @@ const express = require('express')
 const app = express()
 const expHan = require('express-handlebars')
 const bodPar = require('body-parser')
-const metOve = require('method-override')
 const mongoose = require('mongoose')
 const generator = require('./generator.js')
 const Link = require('./models/link')
-const MONGODB_URI = process.env.MONGODB_URI || 'heroku_s9t8hlbm'
-const host = "https://conservative-parliament-43220.herokuapp.com/"
+const MONGODB_URI = 'mongodb://localhost/storten-link' || process.env.MONGODB_URI
+const host = "http://localhost:3000/" || "https://conservative-parliament-43220.herokuapp.com/"
+
 
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 const db = mongoose.connection
@@ -19,7 +19,6 @@ db.once('open', () => console.log('mongodb connected'))
 app.engine('handlebars', expHan({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 app.use(bodPar.urlencoded({ extended: true }))
-app.use(metOve('_method'))
 
 
 app.get('/', (req, res) => {
@@ -32,14 +31,21 @@ app.post('/url', (req, res) => {
   if (!originLink) {
     res.render('show')
   } else {
-    const code = generator()
-    return Link.create({ originLink, code })
-      .then(() => Link.find({ originLink: originLink })
-        .then(() => res.render('show', { originLink, code, host }))
-        .catch(error => console.log('error'))
-      )
+    let duplicatedLink = ""
+    Link.find({ originLink: "https://www.facebook.com" })
+      .lean()
+      .then(data => console.log(data))
+    // .then(data => duplicatedLink = data)
+    // if (duplicatedLink == "") {
+    //   const code = generator()
+    //   return Link.create({ originLink, code })
+    //     .then(() => Link.find({ originLink: originLink }))
+    //     .then(() => res.render('show', { originLink, code, host }))
+    //     .catch(error => console.log('error'))
+    // } else {
+    //   console.log(duplicatedLink)
+    // }
   }
-
 })
 
 
