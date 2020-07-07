@@ -31,20 +31,30 @@ app.post('/url', (req, res) => {
   if (!originLink) {
     res.render('show')
   } else {
-    let duplicatedLink = ""
-    Link.find({ originLink: "https://www.facebook.com" })
-      .lean()
-      .then(data => console.log(data))
-    // .then(data => duplicatedLink = data)
-    // if (duplicatedLink == "") {
-    //   const code = generator()
-    //   return Link.create({ originLink, code })
-    //     .then(() => Link.find({ originLink: originLink }))
-    //     .then(() => res.render('show', { originLink, code, host }))
-    //     .catch(error => console.log('error'))
-    // } else {
-    //   console.log(duplicatedLink)
-    // }
+
+
+    let existedData = ""
+
+    Link.find({ originLink: originLink })
+      .then(data => existedData = data)
+
+
+    if (existedData === []) {
+      console.log("1", existedData)
+      const code = generator()
+
+
+      return Link.create({ originLink, code })
+        .then(() => Link.find({ "originLink": originLink }))
+        .then(() => res.render('show', { originLink, code, host }))
+        .catch(error => console.log('error'))
+
+    } else {
+      console.log("2", existedData)
+      Link.find({ originLink: originLink })
+        .lean()
+        .then(data => res.render('show', { originLink: data[0].originLink, code: data[0].code, host }))
+    }
   }
 })
 
