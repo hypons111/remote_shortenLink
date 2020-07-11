@@ -5,15 +5,13 @@
 
 {{#if originLink}}
 <h1>Success! Please use this link:</h1>
-<p>{{host}}{{ code }}</p>
-<p>{{ originLink }}</p>
+<p id="stortenLink">{{host}}{{ code }}</p>
+<button data-clipboard-target="#stortenLink">Copy</button>
 {{/ if}}
-
 
 {{!-- 防止表單送出並提示使用者 --}}
 {{#unless originLink}}
 <h1>請輸入網址</h1>
 {{/ unless}}
 
-
-<a href="/">Back</a>
+<a href="/"><button>Back</button></a>
